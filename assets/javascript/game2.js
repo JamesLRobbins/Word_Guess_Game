@@ -1,6 +1,6 @@
 // Global Variables
 
-var gameSelection = ["Contra", "Sonic"];
+var gameSelection = ["contra", "sonic"];
 var wins = 0;
 var loss = 0;
 var wrongGuess = [];
@@ -9,15 +9,20 @@ var blanks = [];
 var guesses = [];
 var answer;
 var winCounter = 0;
+var correct = 0;
 
 // Functions
 
+// Start Game
 function startGame() {
-    // Picks answer
-    resetGame();
+    
+
 answer = gameSelection[Math.floor(Math.random() * gameSelection.length)];
 console.log(answer);
 
+}
+
+function answer() {
 
 for(var i = 0; i < answer.length; i++) {
     blanks.push('_');
@@ -28,33 +33,31 @@ for(var i = 0; i < answer.length; i++) {
     wrongGuess = [];
     guessesLeft = 9;
 
-    
-    
-    
-
 }
 
-function resetGame() {
 
-    
-
-}
-
+// Win/Lose
 function winLose() {
 
-    if(wins === answer.length) {
+    if(correct === answer.length) {
 
         alert("Winner!");
         document.getElementById("wins").textContent = "Wins: " + wins;
+        wins++;
+        
+        
         startGame();
     } else if (guessesLeft === 0) {
         alert("Loser!");
         document.getElementById("losses").textContent = "Losses: " + loss;
         startGame();
+        loss++;
     }
 
 
 }
+
+//Check for answer
 
 document.onkeyup = function(event) {
     guesses = event.key;
@@ -64,8 +67,8 @@ document.onkeyup = function(event) {
         for(var i = 0; i < answer.length; i++) {
             if(answer[i] === guesses) {
                 blanks[i] = guesses;
-                console.log(blanks);
-                wins++;
+                document.getElementById("answer").textContent = blanks.join(" ");
+                correct++
                 winLose();
             }
         }
@@ -73,7 +76,6 @@ document.onkeyup = function(event) {
     } else {
         wrongGuess.push(guesses);
         guessesLeft--;
-        loss++;
         document.getElementById("guessesLeft").textContent = "Guesses Left: " + guessesLeft;
         winLose();
         
