@@ -5,33 +5,37 @@ var wins = 0;
 var loss = 0;
 var wrongGuess = [];
 var guessesLeft = 9;
-var blanks = [];
+var blanks = [];  
 var guesses = [];
 var answer;
-var winCounter = 0;
 var correct = 0;
 
 // Functions
 
 // Start Game
 function startGame() {
-    
 
+      
+    
 answer = gameSelection[Math.floor(Math.random() * gameSelection.length)];
 console.log(answer);
 
-}
+document.getElementById("wins").textContent = "Wins: " + wins;
+document.getElementById("losses").textContent = "Losses: " + loss;
+document.getElementById("guessesLeft").textContent = "Guesses Left: " + guessesLeft;
+document.getElementById("start").textContent = " ";
 
-function answer() {
 
-for(var i = 0; i < answer.length; i++) {
-    blanks.push('_');
-}
+    for(var i = 0; i < answer.length; i++) {
+         blanks.push('_');
+    }
 
-    document.getElementById("answer").textContent = blanks.join(" ");
+        document.getElementById("answer").textContent = blanks.join(" ");
 
-    wrongGuess = [];
-    guessesLeft = 9;
+        wrongGuess = [];
+        guessesLeft = 9;
+
+        
 
 }
 
@@ -40,24 +44,21 @@ for(var i = 0; i < answer.length; i++) {
 function winLose() {
 
     if(correct === answer.length) {
-
-        alert("Winner!");
-        document.getElementById("wins").textContent = "Wins: " + wins;
         wins++;
-        
-        
+
+        alert(answer + " is correct!");
+        blanks = []
         startGame();
     } else if (guessesLeft === 0) {
-        alert("Loser!");
-        document.getElementById("losses").textContent = "Losses: " + loss;
-        startGame();
         loss++;
+        alert("Loser!");
+        blanks = []
+        startGame();
+        
     }
 
 
 }
-
-//Check for answer
 
 document.onkeyup = function(event) {
     guesses = event.key;
@@ -77,16 +78,28 @@ document.onkeyup = function(event) {
         wrongGuess.push(guesses);
         guessesLeft--;
         document.getElementById("guessesLeft").textContent = "Guesses Left: " + guessesLeft;
+        
         winLose();
         
     }
 
+    
+
 }
+
+//Check for answer
+
+
+
+
+
 
 // Main
 
-startGame();
 
+
+
+startGame();
 
 
 

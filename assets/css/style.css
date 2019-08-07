@@ -1,14 +1,18 @@
-/* body {
-    background: black;
+* {
     text-align: center;
+    font-family: 'Bungee Inline', cursive;
+    font-size: 20px;
+}
+
+#genesis {
+    width: 250px;
+    height: 250px;
+    float: left;
     
 }
 
-h1, h2 {
-    color: white;
+#nes { 
+    float: right;
+    margin-top: 50px;
     
 }
-
-p div {
-    color:white;
-} */
