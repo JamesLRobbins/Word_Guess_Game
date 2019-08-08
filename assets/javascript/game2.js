@@ -45,9 +45,9 @@ function winLose() {
 
     if(correct === answer.length) {
         wins++;
-
         alert(answer + " is correct!");
         blanks = []
+        correct = 0;
         startGame();
     } else if (guessesLeft === 0) {
         loss++;
