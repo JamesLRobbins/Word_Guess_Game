@@ -27,8 +27,8 @@ console.log(answer);
 document.getElementById("wins").textContent = "Wins: " + wins;
 document.getElementById("losses").textContent = "Losses: " + loss;
 document.getElementById("guessesLeft").textContent = "Guesses Left: " + guessesLeft;
-document.getElementById("start").textContent = " ";
-guesses = []
+
+guesses = 0
 wrongGuess = []
 guessesLeft = 9;
 console.log(guesses);
@@ -41,20 +41,31 @@ console.log(guesses);
         document.getElementById("answer").textContent = blanks.join(" ");      
 }
 
+// //wrongGuess reset
+// function wrongGuessReset() {
+//     wrongGuess = [];
+// }
+
 
 // Win/Lose
 function winLose() {
 
-    if(correct === answer.length) {
+    if(blanks.indexOf("_") === -1) {
         wins++;
         alert(answer + " is correct!");
-        blanks = []
+        blanks = [];
         correct = 0;
+        wrongGuess = [];
+        guessesLeft = 9;
+        document.getElementById("guesses").textContent = "";
         startGame();
     } else if (guessesLeft === 0) {
         loss++;
         alert("You lost!");
-        blanks = []
+        guessesLeft = 9;
+        blanks = [];
+        wrongGuess = [];
+        document.getElementById("guesses").textContent = "";
         startGame();
         
     }
@@ -64,6 +75,8 @@ function winLose() {
 
 document.onkeyup = function(event) {
     guesses = event.key;
+
+    document.getElementById("start").textContent = " ";
 
     
     if(answer.indexOf(guesses) > -1) {

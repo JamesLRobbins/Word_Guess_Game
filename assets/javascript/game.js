@@ -9,6 +9,8 @@ var blanks = [];
 var guesses = [];
 var answer;
 var correct = 0;
+var correctGuess = "";
+var guessArray = [];
 
 
 
@@ -18,6 +20,8 @@ var correct = 0;
 
 // Start Game
 function startGame() {
+
+
     
 answer = gameSelection[Math.floor(Math.random() * gameSelection.length)];
 console.log(answer);
@@ -31,6 +35,7 @@ wrongGuess = []
 guessesLeft = 9;
 
 
+
     for(var i = 0; i < answer.length; i++) {
          blanks.push('_');
     }
@@ -39,18 +44,37 @@ guessesLeft = 9;
 }
 
 
+/*
+In WinorLose win condition
+
+if(crrctGuess.length == answer.length)
+{
+    for(i = 0; i )
+
+
+}
+
+
+
+
+*/
+
+
 // Win/Lose
 function winLose() {
-
-    if(correct === answer.length) {
+    console.log("In WinOrLose");
+    if(correctGuess === answer) {
+        console.log("In win");
         wins++;
         alert(answer + " is correct!");
         blanks = []
         correct = 0;
+        correctGuess = ""
         startGame();
     } else if (guessesLeft === 0) {
+        console.log("In lose.");
         loss++;
-        alert("Loser!");
+        alert("You lost!");
         blanks = []
         startGame();
         
@@ -62,14 +86,38 @@ function winLose() {
 document.onkeyup = function(event) {
     guesses = event.key;
 
-    
+    console.log("IM HERE!!!!!");
+    console.log("CorrectGuess Length: " + correctGuess.length);
     if(answer.indexOf(guesses) > -1) {
-
+        console.log("In IF in KeyUp");           
         for(var i = 0; i < answer.length; i++) {
             if(answer[i] === guesses) {
+            if(correctGuess.length != 0)
+            {
+                for(var x = 0; x < correctGuess.length; x++)
+                {
+                for(var y = 0; y < guessArray.length; y++)
+                {
+                    if(correctGuess[x] != guesses && guessArray[y] != guesses)
+                    {
+                        console.log("in correctGuess !if")
+                        correctGuess += guesses;
+                        guessArray.push(guesses);
+                    }
+                }//end for y
+                }//end for x
+            }
+            else if(correctGuess.length == 0)
+            {
+                correctGuess += guesses;
+                guessArray.push(guesses);
+            }
+
+                //correctGuess += guesses;
                 blanks[i] = guesses;
                 document.getElementById("answer").textContent = blanks.join(" ");
                 correct++
+                console.log("correctGuess: " + correctGuess);
                 winLose();
             }
         }
@@ -91,17 +139,6 @@ document.onkeyup = function(event) {
 }
 
 startGame();
-
-
-
-//Check for answer
-
-
-
-
-
-
-// Main
 
 
 
